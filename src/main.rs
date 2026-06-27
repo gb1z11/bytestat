@@ -10,9 +10,11 @@ fn main() {
         Ok(config) => {
             println!("File path: {}", config.file_path);
 
-            let contents = fs::read_to_string(config.file_path)
-                .expect("Something went wrong reading the file");
-            println!("Content of the file: {}", contents);
+            let contents = fs::read_to_string(config.file_path);
+                match contents {
+                    Ok(contents) => println!("{}", contents),
+                    Err(err) => println!("{}", err),
+                }
         }
         Err(error) => {
             println!("{}", error);
